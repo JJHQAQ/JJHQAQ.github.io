@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>hexo部署报错及修理过程</title>
+    <url>/2020/02/02/hexo%E9%83%A8%E7%BD%B2%E6%8A%A5%E9%94%99%E5%8F%8A%E4%BF%AE%E7%90%86%E8%BF%87%E7%A8%8B/</url>
+    <content><![CDATA[<h1 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h1><p>这天，俺一如既往得颓废，然后战某神说他刚建了个博客，让我康康…..然后对比之下俺惊奇得发现俺的博客有点瑕疵，所以随手改了下，之后hexo g&amp;&amp;hexo d…..结果出错了！？人有点傻，只得</p>
+]]></content>
+      <categories>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>杂学</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>CodeforcesER81</title>
     <url>/2020/01/30/CodeforcesER81/</url>
     <content><![CDATA[<h1 id="A"><a href="#A" class="headerlink" title="A"></a>A</h1><h2 id="题目大意"><a href="#题目大意" class="headerlink" title="题目大意"></a>题目大意</h2><p>用给定数目的灯管(类似计算器上的数字显示屏，一个数字由7根灯管亮灭组成)，显示尽可能大的数。</p>

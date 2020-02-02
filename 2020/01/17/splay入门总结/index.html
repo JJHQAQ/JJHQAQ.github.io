@@ -1,0 +1,1212 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="模板,数据结构," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Splay伸展树的本质">
+<meta property="og:type" content="article">
+<meta property="og:title" content="splay入门总结">
+<meta property="og:url" content="http://yoursite.com/2020/01/17/splay%E5%85%A5%E9%97%A8%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:site_name" content="JJHQAQ的学习笔记">
+<meta property="og:description" content="Splay伸展树的本质">
+<meta property="og:image" content="http://yoursite.com/2020/01/17/splay%E5%85%A5%E9%97%A8%E6%80%BB%E7%BB%93/rotate.jpg">
+<meta property="article:published_time" content="2020-01-17T01:19:25.000Z">
+<meta property="article:modified_time" content="2020-02-02T06:24:38.142Z">
+<meta property="article:author" content="JJHQAQ">
+<meta property="article:tag" content="模板">
+<meta property="article:tag" content="数据结构">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2020/01/17/splay%E5%85%A5%E9%97%A8%E6%80%BB%E7%BB%93/rotate.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/01/17/splay入门总结/"/>
+
+
+
+
+
+  <title>splay入门总结 | JJHQAQ的学习笔记</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">JJHQAQ的学习笔记</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+<!-- 打字礼花及震动特效 -->
+
+<div id="append_parent"></div><div id="ajaxwaitid"></div>
+<script type="text/javascript" src="/lib/activate-power-mode/activate-power-mode.js"></script>
+<script>
+	POWERMODE.colorful = true;
+	POWERMODE.shake = false;
+	document.body.addEventListener('input',POWERMODE);
+</script>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/17/splay%E5%85%A5%E9%97%A8%E6%80%BB%E7%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="JJHQAQ">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/JJH.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JJHQAQ的学习笔记">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">splay入门总结</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-17T09:19:25+08:00">
+                2020-01-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ACM-ICPC/" itemprop="url" rel="index">
+                    <span itemprop="name">ACM/ICPC</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020/01/17/splay%E5%85%A5%E9%97%A8%E6%80%BB%E7%BB%93/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/01/17/splay%E5%85%A5%E9%97%A8%E6%80%BB%E7%BB%93/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">本文总阅读 <i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Splay伸展树的本质"><a href="#Splay伸展树的本质" class="headerlink" title="Splay伸展树的本质"></a>Splay伸展树的本质</h1><a id="more"></a>
+<h2 id="二叉搜索树"><a href="#二叉搜索树" class="headerlink" title="二叉搜索树"></a>二叉搜索树</h2><p>所谓二叉搜索树，就是保证内部数据每个节点只有两个儿子，而且左儿子小于本节点小于右节点，用这种性质有很多问题都可以很好地利用这种数据结构来完成。然而他有一个致命的缺点，就是普通的搜索树在数据不随机的情况下很容易退化成链，变得毫无用处。</p>
+<h2 id="Splay"><a href="#Splay" class="headerlink" title="Splay"></a>Splay</h2><p>伸展树，就是对二叉搜索树的一种优化，通过不时地Splay(x)操作(讲x变为树的根)，使树的结构能趋向于平衡，从而保证时间优越性(不过显然常数贼大)。</p>
+<h1 id="Splay的一些基本操作"><a href="#Splay的一些基本操作" class="headerlink" title="Splay的一些基本操作"></a>Splay的一些基本操作</h1><h2 id="基本操作需要的一些数据"><a href="#基本操作需要的一些数据" class="headerlink" title="基本操作需要的一些数据"></a>基本操作需要的一些数据</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> recy;<span class="comment">//在该节点的值的重复个数</span></span><br><span class="line">    <span class="keyword">int</span> sum;<span class="comment">//以该节点为根的子树的元素的个数(包含该节点，不是节点数，因为一个节点可能包含多个元素)</span></span><br><span class="line">    <span class="keyword">int</span> ch[<span class="number">2</span>];<span class="comment">//左右儿子，左为0，右为1</span></span><br><span class="line">    <span class="keyword">int</span> fa;<span class="comment">//父节点</span></span><br><span class="line">    <span class="keyword">int</span> v;<span class="comment">//值</span></span><br><span class="line">&#125;A[<span class="number">10000000</span>];</span><br><span class="line"><span class="keyword">int</span> cnt = <span class="number">0</span>,root=<span class="number">0</span>,SUM=<span class="number">0</span>;<span class="comment">//cnt使用的序号个数，root根节点序号，SUM一共使用的节点个数。</span></span><br></pre></td></tr></table></figure>
+<h2 id="get-which-int-x"><a href="#get-which-int-x" class="headerlink" title="get_which(int x)"></a>get_which(int x)</h2><p>查询x是父亲的哪个儿子(左为0，右为1)，贼短，不单独写个函数也影响不大。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">get_which</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> A[A[x].fa].ch[<span class="number">1</span>]==x;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="update-int-x"><a href="#update-int-x" class="headerlink" title="update(int x)"></a>update(int x)</h2><p>更新该节点下的元素个数。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">update</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!x) <span class="keyword">return</span> ;</span><br><span class="line">    A[x].sum = A[x].recy;</span><br><span class="line">    <span class="keyword">if</span> (A[x].ch[<span class="number">1</span>]) A[x].sum+=A[A[x].ch[<span class="number">1</span>]].sum;</span><br><span class="line">    <span class="keyword">if</span> (A[x].ch[<span class="number">0</span>]) A[x].sum+=A[A[x].ch[<span class="number">0</span>]].sum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="rotate-int-x"><a href="#rotate-int-x" class="headerlink" title="rotate(int x)"></a>rotate(int x)</h2><p>作用是旋转自己与父节点，使得x的层数减1，也就是与根节点更靠近一些。具体需要改变三条关系，分别是自己与父亲，父亲与爷爷，自己与自己的左(或者右)儿子。</p>
+<ul>
+<li>使得父亲的左(右)儿子与自己的右(左)儿子连边(即自己的  自己与父亲关系相反的  那个儿子)</li>
+<li>使自己与爷爷连边</li>
+<li>使自己被父亲抢走的那个儿子变成父亲</li>
+</ul>
+<p>形象一点的如图：<br><img src="/2020/01/17/splay%E5%85%A5%E9%97%A8%E6%80%BB%E7%BB%93/rotate.jpg" alt="rotate"><br>当然还有其他情况，都符合以上三条，可以自己尝试画一画。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">rotate</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> fa = A[x].fa,g_fa = A[fa].fa,ww = get_which(x),w2=get_which(fa);</span><br><span class="line">    A[fa].ch[ww] = A[x].ch[ww^<span class="number">1</span>];</span><br><span class="line">    A[A[x].ch[ww^<span class="number">1</span>]].fa = fa;</span><br><span class="line">    A[fa].fa = x;</span><br><span class="line">    A[x].fa = g_fa;</span><br><span class="line">    A[x].ch[ww^<span class="number">1</span>] = fa;</span><br><span class="line">    <span class="keyword">if</span> (g_fa)</span><br><span class="line">    A[g_fa].ch[w2] = x;</span><br><span class="line">    update(fa);</span><br><span class="line">    update(x);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Splay-int-x"><a href="#Splay-int-x" class="headerlink" title="Splay(int x)"></a>Splay(int x)</h2><p>作用是使得x成为伸展树的根。<br>显然就。。。不断地对rotate(x)就能达到这个效果。然而需要特判一下自己与父亲，父亲与爷爷的关系是否一样(是否三点一线)，如果是这种情况就需要先旋转父节点，再旋转自己。。。。一开始我也并没有太懂，但是在黄某大仙的点拨下明白了些，就是说假如是一条链的话，你不断的rotate自己最终顶多也就是变成两条链，而特判之后splay会均衡很多。。。。其实感觉特判不特判都有可能使得结构变得不均衡，但是特判之后造呢种垃圾数据应该更难一些。<br>代码如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">splay</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> fa;fa=A[x].fa;rotate(x))</span><br><span class="line">    <span class="keyword">if</span> (A[fa].fa)</span><br><span class="line">    rotate((get_which(x)==get_which(fa))?fa:x);</span><br><span class="line">    root = x;</span><br><span class="line">    <span class="keyword">return</span> ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="insert-int-x"><a href="#insert-int-x" class="headerlink" title="insert(int x)"></a>insert(int x)</h2><p>插入一个节点x。<br>就是普通的在平衡树上插入一个节点，不断地向下找，比当前节点大就找右儿子，小就找左儿子，相等就返回,移动到空节点就造点，最后将x旋转到根节点即可。(理论上不splay(x)也不影响正确性，但是有事没事splay一下嘛，保证树总是均衡的)</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">insert</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!root)&#123;</span><br><span class="line">        cnt++;</span><br><span class="line">        A[cnt].ch[<span class="number">0</span>]=A[cnt].ch[<span class="number">1</span>]=A[cnt].fa=<span class="number">0</span>;</span><br><span class="line">        A[cnt].v = x;</span><br><span class="line">        A[cnt].sum = A[cnt].recy = <span class="number">1</span>;</span><br><span class="line">        root = cnt;</span><br><span class="line">        SUM++;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> now = root,fa=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span> (A[now].v==x)&#123;</span><br><span class="line">            A[now].recy++;</span><br><span class="line">            update(now);</span><br><span class="line">            update(fa);</span><br><span class="line">            splay(now);</span><br><span class="line">            SUM++;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        fa = now;</span><br><span class="line">        now = A[now].ch[A[now].v&lt;x];</span><br><span class="line">        <span class="keyword">if</span> (!now)&#123;</span><br><span class="line">            ++cnt;</span><br><span class="line">            A[fa].ch[A[fa].v&lt;x] = cnt;</span><br><span class="line">            A[cnt].fa = fa;</span><br><span class="line">            A[cnt].ch[<span class="number">0</span>]=A[cnt].ch[<span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">            A[cnt].recy = A[cnt].sum = <span class="number">1</span>;</span><br><span class="line">            A[cnt].v = x;</span><br><span class="line">            splay(cnt);</span><br><span class="line">            SUM++;</span><br><span class="line">            <span class="keyword">return</span> ;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="find-rank-int-x"><a href="#find-rank-int-x" class="headerlink" title="find_rank(int x)"></a>find_rank(int x)</h2><p>找数字x的排名。<br>因为维护了子树和，所以这个还是容易实现的，每次根据当前节点与x的大小关系，比x大就去左儿子找，比x小就去右儿子找(答案加上左儿子的元素与该节点的重复元素的数)，相等就可以返回了。<br><strong>最后有事没事splay一下x</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find_rank</span><span class="params">(<span class="keyword">int</span> x)</span><span class="comment">//查x的排名；</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> now = root;</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span> (!now) <span class="keyword">return</span> ans;</span><br><span class="line">        <span class="keyword">if</span>(x&lt;A[now].v)&#123;</span><br><span class="line">            now = A[now].ch[<span class="number">0</span>];</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            ans+=A[A[now].ch[<span class="number">0</span>]].sum;</span><br><span class="line">            <span class="keyword">if</span> (x==A[now].v) &#123;</span><br><span class="line">                splay(now);</span><br><span class="line">                <span class="keyword">return</span> ans+<span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            ans+=A[now].recy;</span><br><span class="line">            now = A[now].ch[<span class="number">1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="find-num-int-rank"><a href="#find-num-int-rank" class="headerlink" title="find_num(int rank)"></a>find_num(int rank)</h2><p>查找排名为rank的数字<br>与上一个相似，只是判断去左右儿子的条件改为rank与当前节点左子树的元素个数。具体见代码</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find_num</span><span class="params">(<span class="keyword">int</span> rank)</span><span class="comment">//查排名为rank的数</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (rank&gt;SUM) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> now = root;</span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span> (A[now].ch[<span class="number">0</span>]&amp;&amp;A[A[now].ch[<span class="number">0</span>]].sum&gt;=rank)</span><br><span class="line">        now = A[now].ch[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            rank-=A[now].ch[<span class="number">0</span>]?A[A[now].ch[<span class="number">0</span>]].sum:<span class="number">0</span>;</span><br><span class="line">            <span class="keyword">if</span> (rank&lt;=A[now].recy) <span class="keyword">return</span> A[now].v;</span><br><span class="line">            rank-=A[now].recy;</span><br><span class="line">            now = A[now].ch[<span class="number">1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="find-pre"><a href="#find-pre" class="headerlink" title="find_pre()"></a>find_pre()</h2><p>查找根节点的前驱。<br>x的前驱就是比x小的最大的数，在平衡树上的体现就是左子树上最右边的数。代码很好写。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find_pre</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> now = A[root].ch[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">while</span>(A[now].ch[<span class="number">1</span>]) now = A[now].ch[<span class="number">1</span>];</span><br><span class="line">    <span class="keyword">return</span> now;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="find-last"><a href="#find-last" class="headerlink" title="find_last()"></a>find_last()</h2><p>查找根节点的后继。<br>x的后继就是比x大的最小的数，即右子树上最左边的数。代码与上一个相似。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find_last</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> now = A[root].ch[<span class="number">1</span>];</span><br><span class="line">    <span class="keyword">while</span>(A[now].ch[<span class="number">0</span>]) now = A[now].ch[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">return</span> now;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="del-int-x"><a href="#del-int-x" class="headerlink" title="del(int x)"></a>del(int x)</h2><p>删除值x。<br>对于删除点的操作是有点麻烦的。。。</p>
+<ul>
+<li>首先我们把x对应的节点splay到根节点。</li>
+<li>特判掉左右儿子有不存在的情况，左儿子不存在就直接以右儿子为根，右儿子不存在就直接以左儿子为根，或者左右儿子都不存在就把根归零，然后干脆利落的删掉就可以了。</li>
+<li>大部分时候显然左右儿子都是有的，这时候我们在把x的前驱(就叫他pre吧)splay到根节点，这时候可以想象得到，pre为根，x会是他的右儿子，而且x的左儿子为空(因为前驱和x是最相近的两个数嘛)，这时候我们把pre的右儿子连向x的右儿子，然后删掉x即可，记得更新pre的节点数。<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> now = root;</span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span> (!now) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span> (A[now].v==x) <span class="keyword">return</span> now;</span><br><span class="line">        now = A[now].ch[A[now].v&lt;x];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">clean</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">    A[x].ch[<span class="number">0</span>] = A[x].ch[<span class="number">1</span>] = A[x].fa = <span class="number">0</span>;</span><br><span class="line">    A[x].recy = A[x].sum = <span class="number">0</span>;</span><br><span class="line">    A[x].v = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">del</span><span class="params">(<span class="keyword">int</span> x)</span><span class="comment">//删除X</span></span></span><br><span class="line"><span class="function"></span>&#123;   </span><br><span class="line">    <span class="keyword">int</span> is = <span class="built_in">find</span>(x); </span><br><span class="line">    <span class="keyword">if</span> (is==<span class="number">0</span>) <span class="keyword">return</span> ;</span><br><span class="line">    SUM--;</span><br><span class="line">    splay(is);</span><br><span class="line">    <span class="keyword">if</span> (A[root].recy&gt;<span class="number">1</span>)&#123;</span><br><span class="line">        A[root].recy--;</span><br><span class="line">        update(root);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (!A[root].ch[<span class="number">0</span>]&amp;&amp;!A[root].ch[<span class="number">1</span>])&#123;</span><br><span class="line">        clean(root);</span><br><span class="line">        root = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (!A[root].ch[<span class="number">0</span>])&#123;</span><br><span class="line">        <span class="keyword">int</span> old_root = root;</span><br><span class="line">        root = A[root].ch[<span class="number">1</span>];</span><br><span class="line">        A[root].fa = <span class="number">0</span>;</span><br><span class="line">        clean(old_root);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (!A[root].ch[<span class="number">1</span>])&#123;</span><br><span class="line">        <span class="keyword">int</span> old_root = root;</span><br><span class="line">        root = A[root].ch[<span class="number">0</span>];</span><br><span class="line">        A[root].fa = <span class="number">0</span>;</span><br><span class="line">        clean(old_root);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> pre = find_pre();</span><br><span class="line">    splay(pre);</span><br><span class="line">    <span class="keyword">int</span> old_root = A[pre].ch[<span class="number">1</span>];</span><br><span class="line">    A[pre].ch[<span class="number">1</span>] = A[old_root].ch[<span class="number">1</span>];</span><br><span class="line">    A[A[old_root].ch[<span class="number">1</span>]].fa = pre;</span><br><span class="line">    clean(old_root);</span><br><span class="line">    <span class="keyword">return</span> ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="留坑再补"><a href="#留坑再补" class="headerlink" title="留坑再补"></a>留坑再补</h2><h1 id="结言"><a href="#结言" class="headerlink" title="结言"></a>结言</h1>写完了高中的大恐惧splay之后才发现。。。这个也不难阿。。。。只是长而已。。。<br><a href="https://www.luogu.com.cn/problem/P3369" target="_blank" rel="noopener">模板题</a><br>附上我188行的垃圾代码<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># <span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta"># <span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta"># <span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> recy;<span class="comment">//在该节点的值的重复个数</span></span><br><span class="line">    <span class="keyword">int</span> sum;<span class="comment">//以该节点为根的子树的元素的个数(包含该节点，不是节点数，因为一个节点可能包含多个元素)</span></span><br><span class="line">    <span class="keyword">int</span> ch[<span class="number">2</span>];<span class="comment">//左右儿子，左为0，右为1</span></span><br><span class="line">    <span class="keyword">int</span> fa;<span class="comment">//父节点</span></span><br><span class="line">    <span class="keyword">int</span> v;<span class="comment">//值</span></span><br><span class="line">&#125;A[<span class="number">10000000</span>];</span><br><span class="line"><span class="keyword">int</span> cnt = <span class="number">0</span>,root=<span class="number">0</span>,SUM=<span class="number">0</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">get_which</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> A[A[x].fa].ch[<span class="number">1</span>]==x;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">update</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!x) <span class="keyword">return</span> ;</span><br><span class="line">    A[x].sum = A[x].recy;</span><br><span class="line">    <span class="keyword">if</span> (A[x].ch[<span class="number">1</span>]) A[x].sum+=A[A[x].ch[<span class="number">1</span>]].sum;</span><br><span class="line">    <span class="keyword">if</span> (A[x].ch[<span class="number">0</span>]) A[x].sum+=A[A[x].ch[<span class="number">0</span>]].sum;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">rotate</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> fa = A[x].fa,g_fa = A[fa].fa,ww = get_which(x),w2=get_which(fa);</span><br><span class="line">    A[fa].ch[ww] = A[x].ch[ww^<span class="number">1</span>];</span><br><span class="line">    A[A[x].ch[ww^<span class="number">1</span>]].fa = fa;</span><br><span class="line">    A[fa].fa = x;</span><br><span class="line">    A[x].fa = g_fa;</span><br><span class="line">    A[x].ch[ww^<span class="number">1</span>] = fa;</span><br><span class="line">    <span class="keyword">if</span> (g_fa)</span><br><span class="line">    A[g_fa].ch[w2] = x;</span><br><span class="line">    update(fa);</span><br><span class="line">    update(x);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">splay</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> fa;fa=A[x].fa;rotate(x))</span><br><span class="line">    <span class="keyword">if</span> (A[fa].fa)</span><br><span class="line">    rotate((get_which(x)==get_which(fa))?fa:x);</span><br><span class="line">    root = x;</span><br><span class="line">    <span class="keyword">return</span> ;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">insert</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!root)&#123;</span><br><span class="line">        cnt++;</span><br><span class="line">        A[cnt].ch[<span class="number">0</span>]=A[cnt].ch[<span class="number">1</span>]=A[cnt].fa=<span class="number">0</span>;</span><br><span class="line">        A[cnt].v = x;</span><br><span class="line">        A[cnt].sum = A[cnt].recy = <span class="number">1</span>;</span><br><span class="line">        root = cnt;</span><br><span class="line">        SUM++;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> now = root,fa=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span> (A[now].v==x)&#123;</span><br><span class="line">            A[now].recy++;</span><br><span class="line">            update(now);</span><br><span class="line">            update(fa);</span><br><span class="line">            splay(now);</span><br><span class="line">            SUM++;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        fa = now;</span><br><span class="line">        now = A[now].ch[A[now].v&lt;x];</span><br><span class="line">        <span class="keyword">if</span> (!now)&#123;</span><br><span class="line">            ++cnt;</span><br><span class="line">            A[fa].ch[A[fa].v&lt;x] = cnt;</span><br><span class="line">            A[cnt].fa = fa;</span><br><span class="line">            A[cnt].ch[<span class="number">0</span>]=A[cnt].ch[<span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">            A[cnt].recy = A[cnt].sum = <span class="number">1</span>;</span><br><span class="line">            A[cnt].v = x;</span><br><span class="line">            splay(cnt);</span><br><span class="line">            SUM++;</span><br><span class="line">            <span class="keyword">return</span> ;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find_rank</span><span class="params">(<span class="keyword">int</span> x)</span><span class="comment">//查x的排名；</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> now = root;</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span> (!now) <span class="keyword">return</span> ans;</span><br><span class="line">        <span class="keyword">if</span>(x&lt;A[now].v)&#123;</span><br><span class="line">            now = A[now].ch[<span class="number">0</span>];</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            ans+=A[A[now].ch[<span class="number">0</span>]].sum;</span><br><span class="line">            <span class="keyword">if</span> (x==A[now].v) &#123;</span><br><span class="line">                splay(now);</span><br><span class="line">                <span class="keyword">return</span> ans+<span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            ans+=A[now].recy;</span><br><span class="line">            now = A[now].ch[<span class="number">1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find_num</span><span class="params">(<span class="keyword">int</span> rank)</span><span class="comment">//查排名为rank的数</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (rank&gt;SUM) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> now = root;</span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span> (A[now].ch[<span class="number">0</span>]&amp;&amp;A[A[now].ch[<span class="number">0</span>]].sum&gt;=rank)</span><br><span class="line">        now = A[now].ch[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            rank-=A[now].ch[<span class="number">0</span>]?A[A[now].ch[<span class="number">0</span>]].sum:<span class="number">0</span>;</span><br><span class="line">            <span class="keyword">if</span> (rank&lt;=A[now].recy) <span class="keyword">return</span> A[now].v;</span><br><span class="line">            rank-=A[now].recy;</span><br><span class="line">            now = A[now].ch[<span class="number">1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> now = root;</span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span> (!now) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span> (A[now].v==x) <span class="keyword">return</span> now;</span><br><span class="line">        now = A[now].ch[A[now].v&lt;x];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find_pre</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> now = A[root].ch[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">while</span>(A[now].ch[<span class="number">1</span>]) now = A[now].ch[<span class="number">1</span>];</span><br><span class="line">    <span class="keyword">return</span> now;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find_last</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> now = A[root].ch[<span class="number">1</span>];</span><br><span class="line">    <span class="keyword">while</span>(A[now].ch[<span class="number">0</span>]) now = A[now].ch[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">return</span> now;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">clean</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">    A[x].ch[<span class="number">0</span>] = A[x].ch[<span class="number">1</span>] = A[x].fa = <span class="number">0</span>;</span><br><span class="line">    A[x].recy = A[x].sum = <span class="number">0</span>;</span><br><span class="line">    A[x].v = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">del</span><span class="params">(<span class="keyword">int</span> x)</span><span class="comment">//删除X</span></span></span><br><span class="line"><span class="function"></span>&#123;   </span><br><span class="line">    <span class="keyword">int</span> is = <span class="built_in">find</span>(x); </span><br><span class="line">    <span class="keyword">if</span> (is==<span class="number">0</span>) <span class="keyword">return</span> ;</span><br><span class="line">    SUM--;</span><br><span class="line">    splay(is);</span><br><span class="line">    <span class="keyword">if</span> (A[root].recy&gt;<span class="number">1</span>)&#123;</span><br><span class="line">        A[root].recy--;</span><br><span class="line">        update(root);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (!A[root].ch[<span class="number">0</span>]&amp;&amp;!A[root].ch[<span class="number">1</span>])&#123;</span><br><span class="line">        clean(root);</span><br><span class="line">        root = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (!A[root].ch[<span class="number">0</span>])&#123;</span><br><span class="line">        <span class="keyword">int</span> old_root = root;</span><br><span class="line">        root = A[root].ch[<span class="number">1</span>];</span><br><span class="line">        A[root].fa = <span class="number">0</span>;</span><br><span class="line">        clean(old_root);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (!A[root].ch[<span class="number">1</span>])&#123;</span><br><span class="line">        <span class="keyword">int</span> old_root = root;</span><br><span class="line">        root = A[root].ch[<span class="number">0</span>];</span><br><span class="line">        A[root].fa = <span class="number">0</span>;</span><br><span class="line">        clean(old_root);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> pre = find_pre();</span><br><span class="line">    splay(pre);</span><br><span class="line">    <span class="keyword">int</span> old_root = A[pre].ch[<span class="number">1</span>];</span><br><span class="line">    A[pre].ch[<span class="number">1</span>] = A[old_root].ch[<span class="number">1</span>];</span><br><span class="line">    A[A[old_root].ch[<span class="number">1</span>]].fa = pre;</span><br><span class="line">    clean(old_root);</span><br><span class="line">    <span class="keyword">return</span> ;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line">    <span class="comment">// freopen("aaa.in","r",stdin);</span></span><br><span class="line">    <span class="keyword">int</span> n,opt,num;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n);</span><br><span class="line">    <span class="keyword">while</span>(n--)&#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;opt,&amp;num);</span><br><span class="line">        <span class="keyword">if</span> (opt==<span class="number">1</span>) &#123;insert(num);<span class="keyword">continue</span>;&#125;</span><br><span class="line">        <span class="keyword">if</span> (opt==<span class="number">2</span>) &#123;del(num);<span class="keyword">continue</span>;&#125;</span><br><span class="line">        <span class="keyword">if</span> (opt==<span class="number">3</span>) &#123;<span class="built_in">printf</span>(<span class="string">"%d\n"</span>,find_rank(num));<span class="keyword">continue</span>;&#125;</span><br><span class="line">        <span class="keyword">if</span> (opt==<span class="number">4</span>) &#123;<span class="built_in">printf</span>(<span class="string">"%d\n"</span>,find_num(num));<span class="keyword">continue</span>;&#125;</span><br><span class="line">        <span class="keyword">if</span> (opt==<span class="number">5</span>) &#123;insert(num);<span class="built_in">printf</span>(<span class="string">"%d\n"</span>,A[find_pre()].v);del(num);<span class="keyword">continue</span>;&#125;</span><br><span class="line">        <span class="keyword">if</span> (opt==<span class="number">6</span>) &#123;insert(num);<span class="built_in">printf</span>(<span class="string">"%d\n"</span>,A[find_last()].v);del(num);<span class="keyword">continue</span>;&#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E6%A8%A1%E6%9D%BF/" rel="tag"># 模板</a>
+          
+            <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag"># 数据结构</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/01/15/AC%E8%87%AA%E5%8A%A8%E6%9C%BA%E7%9B%B8%E5%85%B3%E6%80%BB%E7%BB%93/" rel="next" title="AC自动机相关总结">
+                <i class="fa fa-chevron-left"></i> AC自动机相关总结
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/01/17/EOJ-Monthly-2020-1/" rel="prev" title="EOJ Monthly 2020.1">
+                EOJ Monthly 2020.1 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/JJH.jpg"
+                alt="JJHQAQ" />
+            
+              <p class="site-author-name" itemprop="name">JJHQAQ</p>
+              <p class="site-description motion-element" itemprop="description">热爱可抵岁月漫长</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Splay伸展树的本质"><span class="nav-number">1.</span> <span class="nav-text">Splay伸展树的本质</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#二叉搜索树"><span class="nav-number">1.1.</span> <span class="nav-text">二叉搜索树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Splay"><span class="nav-number">1.2.</span> <span class="nav-text">Splay</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Splay的一些基本操作"><span class="nav-number">2.</span> <span class="nav-text">Splay的一些基本操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本操作需要的一些数据"><span class="nav-number">2.1.</span> <span class="nav-text">基本操作需要的一些数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#get-which-int-x"><span class="nav-number">2.2.</span> <span class="nav-text">get_which(int x)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#update-int-x"><span class="nav-number">2.3.</span> <span class="nav-text">update(int x)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rotate-int-x"><span class="nav-number">2.4.</span> <span class="nav-text">rotate(int x)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Splay-int-x"><span class="nav-number">2.5.</span> <span class="nav-text">Splay(int x)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#insert-int-x"><span class="nav-number">2.6.</span> <span class="nav-text">insert(int x)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#find-rank-int-x"><span class="nav-number">2.7.</span> <span class="nav-text">find_rank(int x)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#find-num-int-rank"><span class="nav-number">2.8.</span> <span class="nav-text">find_num(int rank)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#find-pre"><span class="nav-number">2.9.</span> <span class="nav-text">find_pre()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#find-last"><span class="nav-number">2.10.</span> <span class="nav-text">find_last()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#del-int-x"><span class="nav-number">2.11.</span> <span class="nav-text">del(int x)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#留坑再补"><span class="nav-number">2.12.</span> <span class="nav-text">留坑再补</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#结言"><span class="nav-number">3.</span> <span class="nav-text">结言</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2019 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">JJHQAQ</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      总访问人数 <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      总访问量 <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      人次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'XHwdQC6lnEqKfsBEb5O6k7eW-gzGzoHsz',
+        appKey: 'PdnptgyOqf83SxAXPldQ7r7B',
+        placeholder: 'please tell me my mistakes...QAQ',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+  
+
+  <script async src="/js/cursor/text.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -400,18 +400,17 @@
       
 
       
-        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>map是一种底层基于红黑树的一种字典数据结构，可以做到key值与value值的对应,内部有序。<br>unordered_map是一种hash实现的字典数据结构，在查找方面效率比map高很多，但内部无序。</p>
-<a id="more"></a>
+        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>map是一种底层基于红黑树的一种字典数据结构，可以做到key值与value值的对应,内部有序。<br>unordered_map是一种hash实现的字典数据结构，在查找方面效率比map高很多，但内部无序。<br><a id="more"></a></p>
 <h1 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h1><h2 id="头文件"><a href="#头文件" class="headerlink" title="头文件"></a>头文件</h2><ul>
-<li>包含&lt;map&gt;和&lt;unordered_map&gt;</li>
+<li>包含\<map\>和\<unordered_map\></unordered_map\></map\></li>
 </ul>
-<h2 id="内部用法"><a href="#内部用法" class="headerlink" title="内部用法"></a>内部用法</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>map&lt;type,type&gt; m;</p>
+<h2 id="内部用法"><a href="#内部用法" class="headerlink" title="内部用法"></a>内部用法</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>map<type,type> m;</type,type></p>
 <h3 id="数据插入"><a href="#数据插入" class="headerlink" title="数据插入"></a>数据插入</h3><ul>
 <li>m.insert(makepair(123,”JJH”));</li>
-<li>m.insert(map&lt;int,string&gt;::value_type(123,”JJH”));</li>
+<li>m.insert(map<int,string>::value_type(123,”JJH”));</int,string></li>
 <li>m[123] = “JJH”;</li>
 </ul>
-<p>注意第三种方式会覆盖原先的值，前两种则会返回一个pair&lt;iterator,bool&gt;,插入的位置和是否插入成功。</p>
+<p>注意第三种方式会覆盖原先的值，前两种则会返回一个pair<iterator,bool>,插入的位置和是否插入成功。</iterator,bool></p>
 <h3 id="查找元素"><a href="#查找元素" class="headerlink" title="查找元素"></a>查找元素</h3><ul>
 <li>iter=m.find(“123”);</li>
 </ul>
@@ -431,8 +430,7 @@
 <li>lower_bound() 返回键值&gt;=给定元素的第一个位置(迭代器)</li>
 <li>upper_bound() 返回键值&gt;给定元素的第一个位置(迭代器)</li>
 </ul>
-<h2 id="自定义排序"><a href="#自定义排序" class="headerlink" title="自定义排序"></a>自定义排序</h2><p>在结构体内部重载即可。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> x;</span><br><span class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span> &lt; (Node <span class="keyword">const</span> &amp;A) <span class="keyword">const</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> x&lt;A.x;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="自定义排序"><a href="#自定义排序" class="headerlink" title="自定义排序"></a>自定义排序</h2><p>在结构体内部重载即可。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> x;</span><br><span class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span> &lt; (Node <span class="keyword">const</span> &amp;A) <span class="keyword">const</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> x&lt;A.x;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h2 id="unordered-map"><a href="#unordered-map" class="headerlink" title="unordered_map"></a>unordered_map</h2><p>用法基本一致，除了lower_bound和upper_bound.重载需要重载==。</p>
 
       
@@ -562,7 +560,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-count">21</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

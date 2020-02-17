@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="JJHQAQ的学习笔记">
 <meta property="og:description" content="概述map是一种底层基于红黑树的一种字典数据结构，可以做到key值与value值的对应,内部有序。unordered_map是一种hash实现的字典数据结构，在查找方面效率比map高很多，但内部无序。">
 <meta property="article:published_time" content="2020-01-23T09:22:40.000Z">
-<meta property="article:modified_time" content="2020-02-02T06:23:16.858Z">
+<meta property="article:modified_time" content="2020-02-17T04:56:26.118Z">
 <meta property="article:author" content="JJHQAQ">
 <meta property="article:tag" content="模板">
 <meta property="article:tag" content="STL">
@@ -402,9 +402,9 @@
       
         <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>map是一种底层基于红黑树的一种字典数据结构，可以做到key值与value值的对应,内部有序。<br>unordered_map是一种hash实现的字典数据结构，在查找方面效率比map高很多，但内部无序。<br><a id="more"></a></p>
 <h1 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h1><h2 id="头文件"><a href="#头文件" class="headerlink" title="头文件"></a>头文件</h2><ul>
-<li>包含\<map\>和\<unordered_map\></unordered_map\></map\></li>
+<li>包含 /<map>和/<unordered_map></unordered_map></map></li>
 </ul>
-<h2 id="内部用法"><a href="#内部用法" class="headerlink" title="内部用法"></a>内部用法</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>map<type,type> m;</type,type></p>
+<h2 id="内部用法"><a href="#内部用法" class="headerlink" title="内部用法"></a>内部用法</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>map /&lt; type,type /&gt; m;</p>
 <h3 id="数据插入"><a href="#数据插入" class="headerlink" title="数据插入"></a>数据插入</h3><ul>
 <li>m.insert(makepair(123,”JJH”));</li>
 <li>m.insert(map<int,string>::value_type(123,”JJH”));</int,string></li>
@@ -424,7 +424,7 @@
 <h3 id="其他操作"><a href="#其他操作" class="headerlink" title="其他操作"></a>其他操作</h3><ul>
 <li>begin()       返回头部迭代器</li>
 <li>clear()       删除所有元素</li>
-<li>conut()       返回指定元素出现次数</li>
+<li>count()       返回指定元素出现次数</li>
 <li>empty()       返回是否为空(bool)</li>
 <li>end()         尾指针</li>
 <li>lower_bound() 返回键值&gt;=给定元素的第一个位置(迭代器)</li>
@@ -560,7 +560,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-count">24</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Codeforces," />
+  <meta name="keywords" content="python," />
 
 
 
@@ -79,16 +79,16 @@
 
 
 
-<meta name="description" content="A签到题，输入n输出n+1.">
+<meta name="description" content="中文编码如果使用python2，可能会碰到中文编码错误的问题，解决方法是在程序开头加一行    # -- coding：UTF-8 --或者# coding&#x3D;utf-8  python3默认是utf-8,所以一般没啥问题">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Codeforces613(div2)">
-<meta property="og:url" content="http://yoursite.com/2020/01/11/Codeforces613-div2/index.html">
+<meta property="og:title" content="python近日细节性总结(无序)">
+<meta property="og:url" content="http://yoursite.com/2020/04/21/python%E4%BB%8A%E6%97%A5%E7%BB%86%E8%8A%82%E6%80%A7%E6%80%BB%E7%BB%93-%E6%97%A0%E5%BA%8F/index.html">
 <meta property="og:site_name" content="JJHQAQ的学习笔记">
-<meta property="og:description" content="A签到题，输入n输出n+1.">
-<meta property="article:published_time" content="2020-01-11T09:19:08.000Z">
-<meta property="article:modified_time" content="2020-02-02T06:20:47.153Z">
+<meta property="og:description" content="中文编码如果使用python2，可能会碰到中文编码错误的问题，解决方法是在程序开头加一行    # -- coding：UTF-8 --或者# coding&#x3D;utf-8  python3默认是utf-8,所以一般没啥问题">
+<meta property="article:published_time" content="2020-04-21T12:15:40.000Z">
+<meta property="article:modified_time" content="2020-04-21T13:44:59.360Z">
 <meta property="article:author" content="JJHQAQ">
-<meta property="article:tag" content="Codeforces">
+<meta property="article:tag" content="python">
 <meta name="twitter:card" content="summary">
 
 
@@ -119,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2020/01/11/Codeforces613-div2/"/>
+  <link rel="canonical" href="http://yoursite.com/2020/04/21/python今日细节性总结-无序/"/>
 
 
 
 
 
-  <title>Codeforces613(div2) | JJHQAQ的学习笔记</title>
+  <title>python近日细节性总结(无序) | JJHQAQ的学习笔记</title>
   
 
 
@@ -295,7 +295,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/11/Codeforces613-div2/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/21/python%E4%BB%8A%E6%97%A5%E7%BB%86%E8%8A%82%E6%80%A7%E6%80%BB%E7%BB%93-%E6%97%A0%E5%BA%8F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="JJHQAQ">
@@ -312,7 +312,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Codeforces613(div2)</h1>
+          <h1 class="post-title" itemprop="name headline">python近日细节性总结(无序)</h1>
         
 
         <div class="post-meta">
@@ -324,8 +324,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-11T17:19:08+08:00">
-                2020-01-11
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-04-21T20:15:40+08:00">
+                2020-04-21
               </time>
             
 
@@ -347,8 +347,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/ACM-ICPC/" itemprop="url" rel="index">
-                    <span itemprop="name">ACM/ICPC</span>
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
                   </a>
                 </span>
 
@@ -365,8 +365,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2020/01/11/Codeforces613-div2/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2020/01/11/Codeforces613-div2/" itemprop="commentCount"></span>
+                <a href="/2020/04/21/python%E4%BB%8A%E6%97%A5%E7%BB%86%E8%8A%82%E6%80%A7%E6%80%BB%E7%BB%93-%E6%97%A0%E5%BA%8F/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/04/21/python%E4%BB%8A%E6%97%A5%E7%BB%86%E8%8A%82%E6%80%A7%E6%80%BB%E7%BB%93-%E6%97%A0%E5%BA%8F/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -399,19 +399,67 @@
       
 
       
-        <h1 id="A"><a href="#A" class="headerlink" title="A"></a>A</h1><p>签到题，输入n输出n+1.<br><a id="more"></a></p>
-<h1 id="B"><a href="#B" class="headerlink" title="B"></a>B</h1><h2 id="题目大意"><a href="#题目大意" class="headerlink" title="题目大意"></a>题目大意</h2><p>给一个序列A,问是否有一个除了[1,n]的一个子区间使得其区间和比[1,n]的区间和要大或者相等，如果存在，则输出<strong>NO</strong>,否则输出<strong>YES</strong></p>
-<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><p>显然直接去求它的最大区间和就好了，然后去判断这个最大区间是不是[1,n],即可输出答案。求最大区间，可以考虑先进行一遍前缀和预处理，然后对于每一个右端点r,右端点为r的区间的最大值就是sum[l-1]最小的时候的l,然后O(n)扫一遍就能都搞定了~然而连肝五个小时脑子都瓦特了，wa了五发QAQ~</p>
-<h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># <span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta"># <span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta"># <span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta"># <span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> a[<span class="number">100010</span>];</span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> sum[<span class="number">100010</span>];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line">    <span class="comment">// freopen("aaa.in","r",stdin);</span></span><br><span class="line">    <span class="keyword">int</span> T;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;T);</span><br><span class="line">    <span class="keyword">while</span>(T--)&#123;</span><br><span class="line">        <span class="keyword">int</span> n;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++) <span class="built_in">scanf</span>(<span class="string">"%lld"</span>,&amp;a[i]);</span><br><span class="line">        sum[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++) sum[i] = sum[i<span class="number">-1</span>]+a[i];</span><br><span class="line">        <span class="keyword">long</span> <span class="keyword">long</span> sans = <span class="number">-1e15</span>,ansl=<span class="number">0</span>,ansr=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">long</span> <span class="keyword">long</span> minl=<span class="number">1</span>,minn = <span class="number">1e11</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> r=<span class="number">1</span>;r&lt;=n;r++)&#123; </span><br><span class="line">            <span class="keyword">if</span> (minn&gt;=sum[r<span class="number">-1</span>]) &#123;minn = sum[r<span class="number">-1</span>];minl = r;&#125;</span><br><span class="line">            <span class="keyword">if</span> (sans&lt;sum[r]-sum[minl<span class="number">-1</span>])&#123;</span><br><span class="line">                sans = sum[r]-sum[minl<span class="number">-1</span>];</span><br><span class="line">                ansl = minl;ansr = r;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (ansl!=<span class="number">1</span>||ansr!=n) <span class="built_in">cout</span>&lt;&lt;<span class="string">"NO"</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="keyword">else</span> <span class="built_in">cout</span>&lt;&lt;<span class="string">"YES"</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="C"><a href="#C" class="headerlink" title="C"></a>C</h1><h2 id="题目大意-1"><a href="#题目大意-1" class="headerlink" title="题目大意"></a>题目大意</h2><p>求max(a,b)最小的a,b , 使得LCM(a,b) = X(X为输入值)</p>
-<h2 id="解决-1"><a href="#解决-1" class="headerlink" title="解决"></a>解决</h2><p>考虑，如果a,b不是互质的话，即gcd(a,b) = c(c&gt;0),那么应该存在LCM(a/c,b)=LCM(a,b)，或者LCM(a,b/c)=LCM(a,b),总之互质的a,b,总是可以得到最优答案的，具体怎么严谨得证还有待研究。</p>
-<h2 id="Code-1"><a href="#Code-1" class="headerlink" title="Code"></a>Code</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta"># <span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta"># <span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta"># <span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 100005</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">long</span> <span class="keyword">long</span> <span class="title">gcd</span><span class="params">(<span class="keyword">long</span> <span class="keyword">long</span> a,<span class="keyword">long</span> <span class="keyword">long</span> b)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (a==<span class="number">0</span>) <span class="keyword">return</span> b;</span><br><span class="line">    <span class="keyword">return</span> gcd(b%a,a);</span><br><span class="line">&#125; </span><br><span class="line"><span class="function"><span class="keyword">long</span> <span class="keyword">long</span> <span class="title">lcm</span><span class="params">(<span class="keyword">long</span> <span class="keyword">long</span> a,<span class="keyword">long</span> <span class="keyword">long</span> b)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a/gcd(a,b)*b;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">long</span> <span class="keyword">long</span> <span class="title">max</span> <span class="params">(<span class="keyword">long</span> <span class="keyword">long</span> i,<span class="keyword">long</span> <span class="keyword">long</span> j)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (i&gt;j) <span class="keyword">return</span> i;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">return</span> j;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> X;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%lld"</span>,&amp;X);</span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> xx = <span class="built_in">sqrt</span>(X);</span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> ansi=<span class="number">1</span>,ansj=X,anss = X;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">long</span> <span class="keyword">long</span> i=<span class="number">1</span>;i&lt;=xx;i++)&#123;</span><br><span class="line">        <span class="keyword">if</span> (X%i!=<span class="number">0</span>) <span class="keyword">continue</span>;</span><br><span class="line">        <span class="keyword">long</span> <span class="keyword">long</span> j = X/i;</span><br><span class="line">        <span class="keyword">if</span> (gcd(i,j)==<span class="number">1</span>)&#123;   </span><br><span class="line">            <span class="keyword">if</span> (anss&gt; <span class="built_in">max</span> (i,j))&#123;</span><br><span class="line">                ansi = i;ansj = j;</span><br><span class="line">                anss = <span class="built_in">max</span>(i,j);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;ansi&lt;&lt;<span class="string">" "</span>&lt;&lt;ansj&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="D"><a href="#D" class="headerlink" title="D"></a>D</h1><h2 id="题目大意-2"><a href="#题目大意-2" class="headerlink" title="题目大意"></a>题目大意</h2><p>给一组数A,设计一个数X,使得max(ai XOR X)的值最小。</p>
-<h2 id="解决-2"><a href="#解决-2" class="headerlink" title="解决"></a>解决</h2><p>建立一课01树(trie树)，在树上做dp。</p>
+        <h1 id="中文编码"><a href="#中文编码" class="headerlink" title="中文编码"></a>中文编码</h1><p>如果使用python2，可能会碰到中文编码错误的问题，解决方法是在程序开头加一行  </p>
+<blockquote>
+<p># -<em>- coding：UTF-8 -</em>-<br>或者<br># coding=utf-8</p>
+</blockquote>
+<p>python3默认是utf-8,所以一般没啥问题<br><a id="more"></a></p>
+<h1 id="写法细节"><a href="#写法细节" class="headerlink" title="写法细节"></a>写法细节</h1><h2 id="可以用斜杠（-将一行分为多行显示"><a href="#可以用斜杠（-将一行分为多行显示" class="headerlink" title="可以用斜杠（\)将一行分为多行显示"></a>可以用斜杠（\)将一行分为多行显示</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a = one+\</span><br><span class="line">    two+\</span><br><span class="line">    three</span><br></pre></td></tr></table></figure>
+<h2 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h2><p>注释有两种 ‘#‘ 和 三个引号</p>
+<h2 id="同一行显示多条语句"><a href="#同一行显示多条语句" class="headerlink" title="同一行显示多条语句"></a>同一行显示多条语句</h2><p>同一行显示多条语句用分号’;’分割</p>
+<h2 id="print输出"><a href="#print输出" class="headerlink" title="print输出"></a>print输出</h2><p>print输出默认换行，如果不换行需要在末尾加逗号(,)</p>
+<h2 id="代码组"><a href="#代码组" class="headerlink" title="代码组"></a>代码组</h2><p>很多复合性的语句，如if,while,for 要以冒号(:)结尾</p>
+<h1 id="Python变量类型"><a href="#Python变量类型" class="headerlink" title="Python变量类型"></a>Python变量类型</h1><p>Python的标准数据类型有五个：</p>
 <ul>
-<li>如果该节点只有一个儿子或者没有儿子，那么显然这个位置可以抵消掉变成0。</li>
-<li>如果这个节点有两个儿子，那么不论怎么变，这一位都一定是1，对应的值就是&amp;2^i&amp;的形式<br>最后dp解决即可<h2 id="Code-2"><a href="#Code-2" class="headerlink" title="Code"></a>Code</h2>写的有点乱，有些没用的东西懒得删了……<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># <span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta"># <span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta"># <span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta"># <span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta"># <span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> A[<span class="number">100010</span>];</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> col;</span><br><span class="line">    <span class="keyword">int</span> <span class="built_in">size</span>;</span><br><span class="line">    <span class="keyword">int</span> ch[<span class="number">2</span>];</span><br><span class="line">    <span class="keyword">int</span> dep;</span><br><span class="line">&#125;N[<span class="number">3100010</span>];</span><br><span class="line"><span class="keyword">int</span> cnt = <span class="number">0</span>,anss = <span class="number">100</span>;</span><br><span class="line"><span class="keyword">int</span> dp[<span class="number">3100010</span>]; </span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> len = <span class="number">0</span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> dep)</span></span>&#123;</span><br><span class="line">    N[x].dep=dep;</span><br><span class="line">    <span class="keyword">if</span> (N[x].ch[<span class="number">0</span>]!=<span class="number">-1</span>) dfs(N[x].ch[<span class="number">0</span>],dep+<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">if</span> (N[x].ch[<span class="number">1</span>]!=<span class="number">-1</span>) dfs(N[x].ch[<span class="number">1</span>],dep+<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">if</span> (N[x].ch[<span class="number">0</span>]!=<span class="number">-1</span>&amp;&amp;N[x].ch[<span class="number">1</span>]!=<span class="number">-1</span>) dp[x] = <span class="built_in">min</span>(dp[x],<span class="built_in">min</span>(dp[N[x].ch[<span class="number">0</span>]],dp[N[x].ch[<span class="number">1</span>]])+(<span class="number">1</span>&lt;&lt;(len-dep)));</span><br><span class="line">    <span class="keyword">if</span> (N[x].ch[<span class="number">0</span>]==<span class="number">-1</span>&amp;&amp;N[x].ch[<span class="number">1</span>]!=<span class="number">-1</span>) dp[x] = <span class="built_in">min</span>(dp[x],dp[N[x].ch[<span class="number">1</span>]]);</span><br><span class="line">    <span class="keyword">if</span> (N[x].ch[<span class="number">0</span>]!=<span class="number">-1</span>&amp;&amp;N[x].ch[<span class="number">1</span>]==<span class="number">-1</span>) dp[x] = <span class="built_in">min</span>(dp[x],dp[N[x].ch[<span class="number">0</span>]]);</span><br><span class="line">    <span class="keyword">if</span> (N[x].ch[<span class="number">0</span>]==<span class="number">-1</span>&amp;&amp;N[x].ch[<span class="number">1</span>]==<span class="number">-1</span>) dp[x] = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// freopen("aaa.in","r",stdin);</span></span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n);</span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> maxx = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%lld"</span>,&amp;A[i]);</span><br><span class="line">        maxx = <span class="built_in">max</span>(maxx,A[i]);</span><br><span class="line">    &#125;</span><br><span class="line">   </span><br><span class="line">    <span class="keyword">while</span>(maxx)&#123;</span><br><span class="line">        len++;</span><br><span class="line">        maxx&gt;&gt;=<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    len--;</span><br><span class="line">    <span class="keyword">int</span> st=<span class="number">0</span>;</span><br><span class="line">    N[<span class="number">0</span>].<span class="built_in">size</span> = <span class="number">2</span>;</span><br><span class="line">    N[<span class="number">0</span>].col = <span class="number">0</span>;</span><br><span class="line">    N[<span class="number">0</span>].ch[<span class="number">1</span>] = N[<span class="number">0</span>].ch[<span class="number">0</span>] = <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">        st = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=len;j&gt;=<span class="number">0</span>;j--)&#123;</span><br><span class="line">            <span class="keyword">int</span> x = (A[i]&gt;&gt;j)&amp;<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span> (N[st].ch[x]==<span class="number">-1</span>)&#123;</span><br><span class="line">                N[st].ch[x]= ++cnt;</span><br><span class="line">                N[cnt].col = x;</span><br><span class="line">                N[cnt].ch[<span class="number">1</span>] = N[cnt].ch[<span class="number">0</span>] = <span class="number">-1</span>;</span><br><span class="line">                N[cnt].<span class="built_in">size</span> = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            st = N[st].ch[x];</span><br><span class="line">            N[st].<span class="built_in">size</span>++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=cnt;i++) dp[i] = (<span class="number">1</span>&lt;&lt;(len+<span class="number">1</span>))<span class="number">-1</span>;</span><br><span class="line">    dfs(<span class="number">0</span>,<span class="number">0</span>);</span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> ans = dp[<span class="number">0</span>];</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;ans&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>Numbers</li>
+<li>String</li>
+<li>List(列表)</li>
+<li>Tuple(元组)</li>
+<li>Dictionary(字典)</li>
 </ul>
+<p>python是动态语言，变量没有固定的类型限制，就是说虽然一个变量一个时间点只能是一种变量，但是他并不是不能更改用来储存其他类型的变量。差不多只是一个容器的作用。</p>
+<h2 id="Numbers"><a href="#Numbers" class="headerlink" title="Numbers"></a>Numbers</h2><p>python支持整数，浮点数，复数的数字类型。<br>整数型并没有int和long类型的明确限制，在int溢出是会自动转换为long</p>
+<h2 id="String"><a href="#String" class="headerlink" title="String"></a>String</h2><p>String是python的字符串类型，很多意义上与C语言的字符数组类似。</p>
+<p>值得一提的是，他支持一些很舒服的操作：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">str = <span class="string">'JJHQAQ'</span> <span class="comment"># 普通字符串</span></span><br><span class="line">str1 = str[<span class="number">0</span>] <span class="comment"># 一个字符的字符串</span></span><br><span class="line">str2 = str[<span class="number">1</span>:<span class="number">3</span>] <span class="comment"># 由第二个字符到第三个字符组成的字符串</span></span><br><span class="line">str3 = str[<span class="number">2</span>:] <span class="comment"># 由第三个字符往后的字符串</span></span><br><span class="line">str4 = str*<span class="number">2</span>  <span class="comment"># 玄幻的乘法操作，是两个相同的str连接而成</span></span><br><span class="line">str5 = str + <span class="string">"cai"</span> <span class="comment"># 将新字符串接在末尾</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="列表"><a href="#列表" class="headerlink" title="列表[]"></a>列表[]</h2><p>python的数据组形式，可以理解成一串连续的各种类型的变量组成的连续储存结构，类似于C语言的数组，可以嵌套自己；<br>支持+,’*‘,和那几种切片运算</p>
+<h2 id="元组（）"><a href="#元组（）" class="headerlink" title="元组（）"></a>元组（）</h2><p>跟列表相似，只是不能再更改其中内容。类比的话，就好像列表存的是变量，元组存的是常量。<br>用法类似</p>
+<h2 id="字典"><a href="#字典" class="headerlink" title="字典{}"></a>字典{}</h2><p>惊了，这个竟然直接是基本数据类型，太舒服了。<br>字典类似于C语言里的map，可以通过键值访问对应的值。一一对应。</p>
+<h2 id="强转"><a href="#强转" class="headerlink" title="强转"></a>强转</h2><p>python支持用类似   int(x) 的形式强行进行变量类型之间的转换。 而且转换效果异常强大。 各种意义上。<br><del> 能直接把字符串转换成整数我也是惊了 </del></p>
+<h1 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h1><p>值的注意的是</p>
+<p>整除是’\\’ 幂运算是’**‘</p>
+<p>不支持++,—</p>
+<p>逻辑运算符有：</p>
+<blockquote>
+<p>and<br>or<br>not</p>
+</blockquote>
+<p>类比</p>
+<blockquote>
+<p>&amp;&amp;<br>||<br>!</p>
+</blockquote>
+<p>‘in’ 运算符，贼好用，判断序列中是否存在某个值，可以用于列表，元组，字符串，字典</p>
+<p>ps: 常量 in 序列  返回 bool类型（int的子类）<br>变量 in 序列 一般是for里进行枚举</p>
+<p>‘is’ 运算符，判断左右两边变量是否引用同一内存块</p>
+<p>其他都与C语言类似</p>
+<h1 id="条件运算符"><a href="#条件运算符" class="headerlink" title="条件运算符"></a>条件运算符</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> expression:</span><br><span class="line">    sentence</span><br><span class="line"><span class="keyword">elif</span> expression:</span><br><span class="line">    sentence</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    sentence</span><br></pre></td></tr></table></figure>
+<h1 id="循环语句"><a href="#循环语句" class="headerlink" title="循环语句"></a>循环语句</h1><p>有while , for ,有关的关键字是continue ， break ,pass</p>
+<p>其中有点特别的是for，pass</p>
+<p>for用法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> 变量 <span class="keyword">in</span> 序列</span><br><span class="line">    sentence</span><br></pre></td></tr></table></figure>
+<p>pass:<br>占行语句，什么都不会做</p>
+<h1 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h1><p>python的函数用def关键字来定义</p>
+<p>语法：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">functionname</span><span class="params">( parameters )</span>:</span></span><br><span class="line">   <span class="string">"函数_文档字符串"</span></span><br><span class="line">   function_suite</span><br><span class="line">   <span class="keyword">return</span> [expression]</span><br></pre></td></tr></table></figure><br>函数文档可以用help的方法调用来显示。</p>
+<p>函数的参数不会限定类型,但是可以用类似下面的方法进行限制：</p>
+<blockquote>
+<p>def function(var : type) -&gt;return_type:</p>
+</blockquote>
+<p>具体再补趴。。。</p>
+<h1 id="最近刷水题细节总结"><a href="#最近刷水题细节总结" class="headerlink" title="最近刷水题细节总结"></a>最近刷水题细节总结</h1><h2 id="三目运算符"><a href="#三目运算符" class="headerlink" title="三目运算符"></a>三目运算符</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var = true_val <span class="keyword">if</span> expression <span class="keyword">else</span> false_val</span><br></pre></td></tr></table></figure>
+<h2 id="len"><a href="#len" class="headerlink" title="len()"></a>len()</h2><p>len()返回序列长度</p>
+<h2 id="str-join"><a href="#str-join" class="headerlink" title="str.join()"></a>str.join()</h2><p>以str为中间连接符连接join内部的内容.<br>写马拉车的时候回比较方便</p>
+<h2 id="str-replace-str1-str2"><a href="#str-replace-str1-str2" class="headerlink" title="str.replace(str1,str2)"></a>str.replace(str1,str2)</h2><p>讲str中的字符换成指定字符</p>
+<h2 id="list-index-val"><a href="#list-index-val" class="headerlink" title="list.index(val)"></a>list.index(val)</h2><p>返回val对应的一地个序列中匹配值的下标</p>
+<h2 id="快读的正则表达式写法（震撼我妈）"><a href="#快读的正则表达式写法（震撼我妈）" class="headerlink" title="快读的正则表达式写法（震撼我妈）"></a>快读的正则表达式写法（震撼我妈）</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">myAtoi</span><span class="params">(self, s: str)</span> -&gt; int:</span></span><br><span class="line">      <span class="keyword">return</span> max(min(int(*re.findall(<span class="string">'^[\+\-]?\d+'</span>, s.lstrip())), <span class="number">2</span>**<span class="number">31</span> - <span class="number">1</span>), <span class="number">-2</span>**<span class="number">31</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="bool函数"><a href="#bool函数" class="headerlink" title="bool函数"></a>bool函数</h2><p>有两个返回值True和False</p>
 
       
     </div>
@@ -429,7 +477,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Codeforces/" rel="tag"># Codeforces</a>
+            <a href="/tags/python/" rel="tag"># python</a>
           
         </div>
       
@@ -442,8 +490,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/01/11/AtCoderBeginnerContest150/" rel="next" title="AtCoderBeginnerContest150">
-                <i class="fa fa-chevron-left"></i> AtCoderBeginnerContest150
+              <a href="/2020/04/18/%E8%BF%9C%E5%8F%A4%E5%90%91%E8%A1%A5%E9%A2%98%E2%80%94%E2%80%94%E7%8E%AF%E7%90%83%E6%97%85%E8%A1%8C/" rel="next" title="远古向补题——环球旅行">
+                <i class="fa fa-chevron-left"></i> 远古向补题——环球旅行
               </a>
             
           </div>
@@ -451,10 +499,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/01/12/AtcoderDwangoProgrammingContest6th/" rel="prev" title="AtcoderDwangoProgrammingContest6th">
-                AtcoderDwangoProgrammingContest6th <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -617,7 +661,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#A"><span class="nav-number">1.</span> <span class="nav-text">A</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#B"><span class="nav-number">2.</span> <span class="nav-text">B</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目大意"><span class="nav-number">2.1.</span> <span class="nav-text">题目大意</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决"><span class="nav-number">2.2.</span> <span class="nav-text">解决</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Code"><span class="nav-number">2.3.</span> <span class="nav-text">Code</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#C"><span class="nav-number">3.</span> <span class="nav-text">C</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目大意-1"><span class="nav-number">3.1.</span> <span class="nav-text">题目大意</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决-1"><span class="nav-number">3.2.</span> <span class="nav-text">解决</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Code-1"><span class="nav-number">3.3.</span> <span class="nav-text">Code</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#D"><span class="nav-number">4.</span> <span class="nav-text">D</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目大意-2"><span class="nav-number">4.1.</span> <span class="nav-text">题目大意</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决-2"><span class="nav-number">4.2.</span> <span class="nav-text">解决</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Code-2"><span class="nav-number">4.3.</span> <span class="nav-text">Code</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#中文编码"><span class="nav-number">1.</span> <span class="nav-text">中文编码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#写法细节"><span class="nav-number">2.</span> <span class="nav-text">写法细节</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#可以用斜杠（-将一行分为多行显示"><span class="nav-number">2.1.</span> <span class="nav-text">可以用斜杠（\)将一行分为多行显示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注释"><span class="nav-number">2.2.</span> <span class="nav-text">注释</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#同一行显示多条语句"><span class="nav-number">2.3.</span> <span class="nav-text">同一行显示多条语句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#print输出"><span class="nav-number">2.4.</span> <span class="nav-text">print输出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码组"><span class="nav-number">2.5.</span> <span class="nav-text">代码组</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Python变量类型"><span class="nav-number">3.</span> <span class="nav-text">Python变量类型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Numbers"><span class="nav-number">3.1.</span> <span class="nav-text">Numbers</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#String"><span class="nav-number">3.2.</span> <span class="nav-text">String</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#列表"><span class="nav-number">3.3.</span> <span class="nav-text">列表[]</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#元组（）"><span class="nav-number">3.4.</span> <span class="nav-text">元组（）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字典"><span class="nav-number">3.5.</span> <span class="nav-text">字典{}</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#强转"><span class="nav-number">3.6.</span> <span class="nav-text">强转</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#运算符"><span class="nav-number">4.</span> <span class="nav-text">运算符</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#条件运算符"><span class="nav-number">5.</span> <span class="nav-text">条件运算符</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#循环语句"><span class="nav-number">6.</span> <span class="nav-text">循环语句</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#函数"><span class="nav-number">7.</span> <span class="nav-text">函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#最近刷水题细节总结"><span class="nav-number">8.</span> <span class="nav-text">最近刷水题细节总结</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#三目运算符"><span class="nav-number">8.1.</span> <span class="nav-text">三目运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#len"><span class="nav-number">8.2.</span> <span class="nav-text">len()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#str-join"><span class="nav-number">8.3.</span> <span class="nav-text">str.join()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#str-replace-str1-str2"><span class="nav-number">8.4.</span> <span class="nav-text">str.replace(str1,str2)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#list-index-val"><span class="nav-number">8.5.</span> <span class="nav-text">list.index(val)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#快读的正则表达式写法（震撼我妈）"><span class="nav-number">8.6.</span> <span class="nav-text">快读的正则表达式写法（震撼我妈）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bool函数"><span class="nav-number">8.7.</span> <span class="nav-text">bool函数</span></a></li></ol></li></ol></div>
             
 
           </div>

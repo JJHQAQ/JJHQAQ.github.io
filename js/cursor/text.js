@@ -1,7 +1,7 @@
 var a_idx = 0;
 jQuery(document).ready(function($) {
   $("body").click(function(e) {
-    var a = new Array("你站在桥上看风景", "看风景的人在楼上看你","明月装饰了你的窗子","你装饰了别人的梦");
+    var a = new Array("富强", "民主","文明","和谐","自由","平等","公正","法制","爱国","敬业","诚信","友善");
     var $i = $("<span/>").text(a[a_idx]);
     var x = e.pageX,
     y = e.pageY;

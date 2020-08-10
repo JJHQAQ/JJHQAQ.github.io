@@ -1,6 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>VB自学感想</title>
+    <url>/2020/08/10/VB%E8%87%AA%E5%AD%A6%E6%84%9F%E6%83%B3/</url>
+    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>别问我为啥学VB!!!!!!!!!!!!!!!!!!<br><a id="more"></a><br>—————问我我就给你喂狗粮ヾ(@^▽^@)ノ<br>其实是某人的计算机作业，害，把你骗进来真不好意思。</p>
+<h1 id="VB概述"><a href="#VB概述" class="headerlink" title="VB概述"></a>VB概述</h1><p>一个很不灵活的编程语言，因为特化了对与窗口控件的支持，所以导致要写一些别的什么东西的时候总是会怪怪的。<br>特点是可以可视化得添加窗口控件，在写一些简单的窗口软件应用的时候还是相对方便一些的，缺点就是不够灵活，肯定不能像如今的主流编程语言那样为所欲为，或者就算能做也麻烦很多。<br>使用起来的感觉。。。就是怪怪的，因为有一些东西竟然是可以写在设置里，而不是全都靠代码控制。某种程度上就有点像用鼠标点击的编程软件。。。。。我队友跟我说他高中学过这玩意，叫他小学生编程软件23333.</p>
+<h1 id="具体使用"><a href="#具体使用" class="headerlink" title="具体使用"></a>具体使用</h1><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>安装vb的时候记得别装数据访问里的一个小组件，因为win10不支持这个组件，所以安装的时候有可能会死机。</p>
+<h2 id="创建工程"><a href="#创建工程" class="headerlink" title="创建工程"></a>创建工程</h2><p>安装完成后，可以选择创建一个工程，一般来说创建完成后会有一个空的窗口给你。你可以选择使用工具箱在空窗口里画你想要实现的子窗口。</p>
+<h2 id="功能实现"><a href="#功能实现" class="headerlink" title="功能实现"></a>功能实现</h2><p>双击对应的窗口，会自动弹出对应窗口的脚本编辑页面，可以通过选择，决定哪个窗口在什么情况下运行你的代码，感觉上。。。有点js脚本的味道。</p>
+<h2 id="编程语法"><a href="#编程语法" class="headerlink" title="编程语法"></a>编程语法</h2><p>每个窗口就相当于一个对象，可以通过在编程是用   对象.方法  的方式调用修改对应的属性或者函数。<br>对于普遍的编程，语法内容和主流的编程语言差别不大。</p>
+<h3 id="定义变量"><a href="#定义变量" class="headerlink" title="定义变量"></a>定义变量</h3><p>定义格式为<br>Dim 变量名 As 变量类型<br>变量类型有integer，long之类的。<br>顺便这里要注意，变量名是不区分大小写的。。。。。</p>
+<h3 id="赋值"><a href="#赋值" class="headerlink" title="赋值"></a>赋值</h3><p>直接用等于号</p>
+<h3 id="判断语句"><a href="#判断语句" class="headerlink" title="判断语句"></a>判断语句</h3><p>格式为<br>if 判断条件 then:<br>[语句块]<br>else:<br>[语句块]<br>end if</p>
+<p>或者另一个<br>Select Case 变量:<br>Case 数字：<br>[语句块]<br>Case 数字：<br>[语句块]<br>end select</p>
+<h3 id="循环语句"><a href="#循环语句" class="headerlink" title="循环语句"></a>循环语句</h3><p>for循环格式为</p>
+<p>for 循环变量名 = 起始值 to 结束值<br>[语句块]<br>Next 循环变量名</p>
+<p>while循环格式为</p>
+<p>While 判断条件<br>[语句块]<br>Wend</p>
+<h3 id="函数和进程"><a href="#函数和进程" class="headerlink" title="函数和进程"></a>函数和进程</h3><p>函数的定义是<br>[Private|Public] Function 函数名(参数 As 参数类型，参数 As 参数类型) As 返回值类型</p>
+<p>[语句块]</p>
+<p>end function</p>
+<p>进程的定义：<br>[private|Public] Sub 进程名(参数)</p>
+<p>[语句块]</p>
+<p>End Sub</p>
+<h3 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h3><p>可以前面加Rem<br>也可以加单引号‘</p>
+<h1 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h1><p>VB对比当今的主流语言，看上去实在是简陋了一些，支持的数据类型的大小也贼小，感觉就像是上个世纪的编程语言是怎么回事(捂脸笑)<br>不过触类旁通，学习这个刚好印证了我最近学习的python的gui库，感觉也没白学吧。其实主要是段某人的彩虹屁太香了哈哈哈哈，我要飘了飘了！！</p>
+]]></content>
+      <categories>
+        <category>杂学</category>
+      </categories>
+      <tags>
+        <tag>VB</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>2020多校Day5Day6补题</title>
     <url>/2020/08/10/2020%E5%A4%9A%E6%A0%A1Day5Day6%E8%A1%A5%E9%A2%98/</url>
     <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>最近越来越颓了，就硬颓，上周的题硬是拖到这周才开始补。。。。<br>而且这周好多数论题。。。。吐了QAQ<br><a id="more"></a></p>
